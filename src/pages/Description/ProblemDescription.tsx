@@ -46,7 +46,7 @@ function Description({ descriptionText }) {
 
     return (
         <div 
-            className='container flex w-full h-[100vh]'
+            className='flex w-screen h-screen'
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
             

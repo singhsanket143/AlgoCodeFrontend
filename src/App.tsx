@@ -13,7 +13,9 @@ function App() {
   `;
 
   return (
-    <ProblemDescription descriptionText={markdownText}></ProblemDescription>
+    <>
+      <ProblemDescription descriptionText={markdownText}></ProblemDescription>
+    </>
   );
 }
 

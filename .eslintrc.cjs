@@ -14,9 +14,8 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    "semi": [1, "always"],
-    'quotes': [1, 'single'],
-    'indent': ['error', 2],
-    "simple-import-sort/imports": "error"
+    // "semi": [1, "always"],
+    // 'quotes': [1, 'single'],
+    // "simple-import-sort/imports": "error"
   },
 }

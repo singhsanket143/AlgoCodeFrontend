@@ -1,15 +1,9 @@
 
 import { useState } from 'react';
-import AceEditor from 'react-ace';
 import ReactMarkdown from 'react-markdown';
 
-import "ace-builds/src-noconflict/theme-monokai";
-import 'ace-builds/src-noconflict/ace';
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/mode-c_cpp";
-import "ace-builds/src-noconflict/mode-java";
-import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/ext-language_tools";
+
+import NewAceEditor from '../../componants/NewAceEditor';
 
 function Description({ descriptionText }) {
 
@@ -27,16 +21,16 @@ function Description({ descriptionText }) {
     }
 
     const stopDragging = (e) => {
-        if(isDragging) {
+        if (isDragging) {
             setIsDragging(false);
         }
     }
 
     const onDrag = (e) => {
-        if(!isDragging) return;
-        
+        if (!isDragging) return;
+
         const newLeftWidth = (e.clientX / window.innerWidth) * 100;
-        if(newLeftWidth > 10 && newLeftWidth < 90) {
+        if (newLeftWidth > 10 && newLeftWidth < 90) {
             setLeftWidth(newLeftWidth);
         }
 
@@ -45,14 +39,13 @@ function Description({ descriptionText }) {
 
 
     return (
-        <div 
+        <div
             className='flex w-screen h-screen'
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
-            
         >
 
-            <div className='leftPanel h-full overflow-auto' style={{ width: `${leftWidth}%`}}>
+            <div className='leftPanel h-full overflow-auto' style={{ width: `${leftWidth}%` }}>
                 <div className='tabs'>
 
                     <button onClick={() => setActiveTab('statement')}>Problem Statement</button>
@@ -70,26 +63,15 @@ function Description({ descriptionText }) {
 
             </div>
 
-            <div className='divider cursor-col-resize w-[5px] bg-slate-200 h-full' onMouseDown={startDragging}></div>
+            <div className='cursor-col-resize w-[5px] bg-slate-200 hover:bg-blue-600 h-full' onMouseDown={startDragging}></div>
 
-            <div className='rightPanel h-full overflow-auto' style={{ width: `${100-leftWidth}%`}}>
+            <div className='rightPanel h-full overflow-auto' style={{ width: `${100 - leftWidth}%` }}>
                 <div className='editorContainer'>
-                    <AceEditor
-                        mode='javascript'
-                        theme='monokai'
-                        name='codeEditor'
-                        className='editor'
-                        style={{ width: '100%'}}
-                        setOptions={{
-                            enableBasicAutocompletion: true,
-                            enableLiveAutocompletion: true,
-                            showLineNumbers: true,
-                            fontSize: 16
-                        }}
-                    />
+                    <NewAceEditor>
+
+                    </NewAceEditor>
                 </div>
             </div>
-
         </div>
     )
 }

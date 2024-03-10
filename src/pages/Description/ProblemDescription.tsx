@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import AceEditor from 'react-ace';
 import ReactMarkdown from 'react-markdown';
-
+import rehypeRaw from 'rehype-raw';
 import "ace-builds/src-noconflict/theme-monokai";
 import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-javascript";
@@ -10,11 +10,12 @@ import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/ext-language_tools";
+import DOMPurify from 'dompurify';
 
 function Description({ descriptionText }: {descriptionText: string}) {
 
 
-    const sanitizedMarkdown = descriptionText;
+    const sanitizedMarkdown = DOMPurify.sanitize(descriptionText);
 
 
     const [activeTab, setActiveTab] = useState('statement');
@@ -70,7 +71,7 @@ function Description({ descriptionText }: {descriptionText: string}) {
                 </div>
 
                 <div className='markdownViewer p-[20px] basis-1/2'>
-                    <ReactMarkdown>
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
                         {sanitizedMarkdown}
                     </ReactMarkdown>
                 </div>

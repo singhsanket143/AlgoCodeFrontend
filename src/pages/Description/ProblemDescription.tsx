@@ -88,10 +88,10 @@ function Description({ descriptionText }: {descriptionText: string}) {
 
                 <div className='flex gap-x-1.5 justify-start items-center px-4 py-2'>
                     <div>
-                        <button className="btn btn-success btn-sm">Success</button>
+                        <button className="btn btn-success btn-sm">Submit</button>
                     </div>
                     <div>
-                        <button className="btn btn-warning btn-sm">Warning</button>
+                        <button className="btn btn-warning btn-sm">Run Code</button>
                     </div>
                     <div>
                         <select className="select select-info w-full select-sm max-w-xs">

@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import SideBar from './components/SideBar';
 
 import ProblemDescription from './pages/Description/ProblemDescription';
 
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <SideBar />
       <ProblemDescription descriptionText={markdownText}></ProblemDescription>
     </>
   );

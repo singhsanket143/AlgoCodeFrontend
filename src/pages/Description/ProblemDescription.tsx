@@ -4,6 +4,8 @@ import AceEditor from 'react-ace';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-github_dark";
 import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-c_cpp";
@@ -82,6 +84,35 @@ function Description({ descriptionText }: {descriptionText: string}) {
             <div className='divider cursor-col-resize w-[5px] bg-slate-200 h-full' onMouseDown={startDragging}></div>
 
             <div className='rightPanel h-full overflow-auto' style={{ width: `${100-leftWidth}%`}}>
+                
+
+                <div className='flex gap-x-1.5 justify-start items-center px-4 py-2'>
+                    <div>
+                        <button className="btn btn-success btn-sm">Success</button>
+                    </div>
+                    <div>
+                        <button className="btn btn-warning btn-sm">Warning</button>
+                    </div>
+                    <div>
+                        <select className="select select-info w-full select-sm max-w-xs">
+                            <option disabled selected>Language</option>
+                            <option value="">CPP</option>
+                            <option value="">Java</option>
+                            <option value="">JS</option>
+                            <option value="">Python</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select className="select select-info w-full select-sm max-w-xs">
+                            <option disabled selected>Theme</option>
+                            <option value="">Monokai</option>
+                            <option value="">Github</option>
+                            <option value="">Github Dark</option>
+                        </select>
+                    </div>
+
+                </div>
+                
                 <div className='editorContainer'>
                     <AceEditor
                         mode='javascript'

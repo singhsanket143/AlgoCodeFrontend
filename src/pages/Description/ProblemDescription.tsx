@@ -21,18 +21,19 @@ function Description({ descriptionText }) {
     const [leftWidth, setLeftWidth] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
 
-    const startDragging = (e) => {
+    const startDragging = (e: MouseEvent) => {
         setIsDragging(true);
         e.preventDefault();
     }
 
-    const stopDragging = (e) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const stopDragging = (e: MouseEvent) => {
         if(isDragging) {
             setIsDragging(false);
         }
     }
 
-    const onDrag = (e) => {
+    const onDrag = (e: MouseEvent) => {
         if(!isDragging) return;
         
         const newLeftWidth = (e.clientX / window.innerWidth) * 100;

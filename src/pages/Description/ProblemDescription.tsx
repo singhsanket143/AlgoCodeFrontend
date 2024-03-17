@@ -1,5 +1,5 @@
 
-import { useState, DragEvent } from 'react';
+import { useState, DragEvent, useEffect } from 'react';
 import AceEditor from 'react-ace';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -35,6 +35,10 @@ type themeStyle = {
     value: string
 }
 
+const FONT_SIZE_RANGE = [8,10,12,14,16,18,20,24,28,30,32,36,40,44,48,56,64,72,84];
+const DEFAULT_FONT_SIZE = 16;
+const ACE_EDITOR_FONT_SIZE_LS_KEY = "ACE_EDITOR_FONT_SIZE";
+
 function Description({ descriptionText }: {descriptionText: string}) {
 
 
@@ -47,6 +51,7 @@ function Description({ descriptionText }: {descriptionText: string}) {
     const [isDragging, setIsDragging] = useState(false);
     const [language, setLanguage] = useState('javascript');
     const [theme, setTheme] = useState('monokai');
+    const [editorFontSize, setEditorFontSize] = useState();
 
     const startDragging = (e: DragEvent<HTMLDivElement>) => {
         setIsDragging(true);
@@ -85,7 +90,17 @@ function Description({ descriptionText }: {descriptionText: string}) {
         }
     }
 
+    const handleFontSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedSize = parseInt(e.target.value);
+        setEditorFontSize(selectedSize);
+        
+        window.localStorage.setItem(ACE_EDITOR_FONT_SIZE_LS_KEY, JSON.stringify(selectedSize));
+    };
 
+    useEffect(()=>{
+        const savedFontSize: number = JSON.parse(localStorage.getItem(ACE_EDITOR_FONT_SIZE_LS_KEY) || `${DEFAULT_FONT_SIZE}`);
+        setEditorFontSize(savedFontSize);
+    },[]);
 
     return (
         <div 
@@ -147,7 +162,16 @@ function Description({ descriptionText }: {descriptionText: string}) {
                             ))}
                         </select>
                     </div>
-
+                    <div>
+                        <select className="select select-info w-full select-sm max-w-xs" value={editorFontSize} onChange={handleFontSizeChange}>
+                            <option disabled selected>Font Size</option>
+                            {
+                                FONT_SIZE_RANGE.map((size:number)=>(
+                                    <option value={size}>{size}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
                 </div>
                 
                 <div className='editorContainer'>
@@ -161,7 +185,7 @@ function Description({ descriptionText }: {descriptionText: string}) {
                             enableBasicAutocompletion: true,
                             enableLiveAutocompletion: true,
                             showLineNumbers: true,
-                            fontSize: 16
+                            fontSize: editorFontSize
                         }}
                     />
                 </div>

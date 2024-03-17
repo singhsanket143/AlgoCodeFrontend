@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, DragEvent } from 'react';
 import AceEditor from 'react-ace';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -47,19 +47,18 @@ function Description({ descriptionText }: {descriptionText: string}) {
     const [language, setLanguage] = useState('javascript');
     const [theme, setTheme] = useState('monokai');
 
-    const startDragging = (e: MouseEvent) => {
+    const startDragging = (e: DragEvent<HTMLDivElement>) => {
         setIsDragging(true);
         e.preventDefault();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const stopDragging = (e: MouseEvent) => {
+    const stopDragging = () => {
         if(isDragging) {
             setIsDragging(false);
         }
     }
 
-    const onDrag = (e: MouseEvent) => {
+    const onDrag = (e: DragEvent<HTMLDivElement>) => {
         if(!isDragging) return;
         
         const newLeftWidth = (e.clientX / window.innerWidth) * 100;

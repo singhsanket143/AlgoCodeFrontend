@@ -14,6 +14,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "no-unused-vars": "off",
     // "semi": [1, "always"],
     // 'quotes': [1, 'single'],
     // "simple-import-sort/imports": "error"

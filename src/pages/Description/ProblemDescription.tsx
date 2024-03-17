@@ -89,7 +89,7 @@ function Description({ descriptionText }: {descriptionText: string}) {
 
     return (
         <div 
-            className='flex w-screen h-full'
+            className='flex w-screen h-[calc(100vh-57px)]'
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
             

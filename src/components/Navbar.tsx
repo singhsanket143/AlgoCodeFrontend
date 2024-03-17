@@ -1,6 +1,6 @@
 function Navbar() {
     return (
-        <div className="navbar bg-base-100 border-b-2">
+        <div className="navbar bg-base-100 border-b-2 h-[55px]">
             <div className="navbar-start">
                 <div className="dropdown">
                 <label htmlFor="my-drawer">

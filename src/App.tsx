@@ -9,11 +9,11 @@ function App() {
   const markdownText = SampleProblem1.problemStatement;
 
   return (
-    <>
+    <div className='h-[100vh] overflow-hidden'>
       <Navbar />
       <SideBar />
       <ProblemDescription descriptionText={markdownText}></ProblemDescription>
-    </>
+    </div>
   );
 }
 

@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import {  useState } from 'react';
 import logo from '../../assets/leetcodelogo.png'
 import { Link } from 'react-router-dom';
 export default function Signup(){
@@ -11,7 +11,7 @@ export default function Signup(){
 });
 
 
-function handleformchange(e){
+function handleformchange(e ){
     const {name, value} = e.target;
     setsignupdetails({
         ...signupdetails,
@@ -83,7 +83,7 @@ console.log(signupdetails);
                 <div className="mt-4">
                 <p className="text-black">
                      Already have an account ?
-                  <Link to={'/signin'}>
+                  <Link to={'/signin '}>
                      <button className="btn btn-warning rounded-md px-2 mx-5 hover:bg-green-400">
                         SignIn
                      </button>

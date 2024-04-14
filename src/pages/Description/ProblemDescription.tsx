@@ -73,7 +73,7 @@ function Description({ descriptionText }: {descriptionText: string}) {
 
     return (
         <div 
-            className='flex w-screen h-screen'
+            className='flex w-screen h-[calc(100vh-57px)]'
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
             
@@ -98,10 +98,9 @@ function Description({ descriptionText }: {descriptionText: string}) {
 
             <div className='divider cursor-col-resize w-[5px] bg-slate-200 h-full' onMouseDown={startDragging}></div>
 
-            <div className='rightPanel h-full overflow-auto' style={{ width: `${100-leftWidth}%`}}>
-                
+            <div className='rightPanel h-full overflow-auto flex flex-col' style={{ width: `${100-leftWidth}%`}}>
 
-                <div className='flex gap-x-1.5 justify-start items-center px-4 py-2'>
+                <div className='flex gap-x-1.5 justify-start items-center px-4 py-2 basis-[5%]'>
                     <div>
                         <button className="btn btn-success btn-sm">Submit</button>
                     </div>
@@ -134,37 +133,42 @@ function Description({ descriptionText }: {descriptionText: string}) {
 
                 </div>
                 
-                <div className='editorContainer'>
-                    <AceEditor
-                        mode={language}
-                        theme={theme}
-                        name='codeEditor'
-                        className='editor'
-                        style={{ width: '100%', minHeight: '550px'}}
-                        setOptions={{
-                            enableBasicAutocompletion: true,
-                            enableLiveAutocompletion: true,
-                            showLineNumbers: true,
-                            fontSize: 16
-                        }}
-                    />
-                </div>
+                <div className="flex flex-col editor-console grow-[1] ">
 
-                { /* Collapsable test case part */ }
+                    <div className='editorContainer grow-[1]'>
+                        <AceEditor
+                            mode={language}
+                            theme={theme}
+                            name='codeEditor'
+                            className='editor'
+                            style={{ width: '100%'}}
+                            setOptions={{
+                                enableBasicAutocompletion: true,
+                                enableLiveAutocompletion: true,
+                                showLineNumbers: true,
+                                fontSize: 16
+                            }}
+                            height='100%'
+                        />
+                    </div>
 
-                <div className="collapse bg-base-200 rounded-none">
-                    <input type="checkbox" className="peer" /> 
-                    <div className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                        Console
+                    { /* Collapsable test case part */ }
+
+                    <div className="collapse bg-base-200 rounded-none">
+                        <input type="checkbox" className="peer" /> 
+                        <div className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                            Console
+                        </div>
+                        <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
+                        <div role="tablist" className="tabs tabs-boxed w-3/5 mb-4">
+                            <a onClick={() => setTestCaseTab('input')} role="tab" className={isInputTabActive('input')}>Input</a>
+                            <a onClick={() => setTestCaseTab('output')} role="tab" className={isInputTabActive('output')}>Output</a>
+                        </div>
+                            
+                            {(testCaseTab === 'input') ? <textarea rows={4} cols={70} className='bg-neutral text-white rounded-md resize-none'/> : <div className='w-12 h-8'></div>}
+                        </div>
                     </div>
-                    <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
-                    <div role="tablist" className="tabs tabs-boxed w-3/5 mb-4">
-                        <a onClick={() => setTestCaseTab('input')} role="tab" className={isInputTabActive('input')}>Input</a>
-                        <a onClick={() => setTestCaseTab('output')} role="tab" className={isInputTabActive('output')}>Output</a>
-                    </div>
-                        
-                        {(testCaseTab === 'input') ? <textarea rows={4} cols={70} className='bg-neutral text-white rounded-md resize-none'/> : <div className='w-12 h-8'></div>}
-                    </div>
+                
                 </div>
 
             </div>

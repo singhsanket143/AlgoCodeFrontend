@@ -8,13 +8,18 @@ function App() {
   
 
   return (
-    <>
+    <div className='h-[100vh] overflow-hidden'>
       <Navbar />
+
        <SideBar />
       <MainRoutes />
     
      
     </>
+      <SideBar />
+      <ProblemDescription descriptionText={markdownText}></ProblemDescription>
+    </div>
+
   );
 }
 

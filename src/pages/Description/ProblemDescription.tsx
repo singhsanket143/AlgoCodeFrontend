@@ -88,7 +88,7 @@ function Description({ descriptionText }: {descriptionText: string}) {
                 </div>
 
                 <div className='markdownViewer p-[20px] basis-1/2'>
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]} className="prose">
                         {sanitizedMarkdown}
                     </ReactMarkdown>
                 </div>

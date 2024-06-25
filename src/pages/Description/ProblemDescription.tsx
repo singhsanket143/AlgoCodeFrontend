@@ -1,6 +1,7 @@
 
 import { useState, DragEvent } from 'react';
 import AceEditor from 'react-ace';
+import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import "../../imports/AceBuildImports";
@@ -30,7 +31,25 @@ function Description({ descriptionText }: {descriptionText: string}) {
     const [leftWidth, setLeftWidth] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
     const [language, setLanguage] = useState('javascript');
+    const [code, setCode] = useState('');
     const [theme, setTheme] = useState('monokai');
+
+    async function handleSubmission() {
+        try {
+            console.log(code)
+            console.log(language)
+            const response = await axios.post("http://localhost:3000/api/v1/submissions", {
+                code,
+                language,
+                userId: "1",
+                problemId: "1"
+            });
+            console.log(response);
+            return response;
+        } catch(error) {
+            console.log(error);
+        }
+    }
 
     const startDragging = (e: DragEvent<HTMLDivElement>) => {
         setIsDragging(true);
@@ -102,7 +121,7 @@ function Description({ descriptionText }: {descriptionText: string}) {
 
                 <div className='flex gap-x-1.5 justify-start items-center px-4 py-2 basis-[5%]'>
                     <div>
-                        <button className="btn btn-success btn-sm">Submit</button>
+                        <button className="btn btn-success btn-sm" onClick={handleSubmission}>Submit</button>
                     </div>
                     <div>
                         <button className="btn btn-warning btn-sm">Run Code</button>
@@ -139,6 +158,8 @@ function Description({ descriptionText }: {descriptionText: string}) {
                         <AceEditor
                             mode={language}
                             theme={theme}
+                            value={code}
+                            onChange={(e: string) => setCode(e)}
                             name='codeEditor'
                             className='editor'
                             style={{ width: '100%'}}
